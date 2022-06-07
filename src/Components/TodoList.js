@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 const ItemTodo = styled.div`
@@ -23,38 +23,19 @@ const DeleteTodo = styled.button`
 `;
 
 function TodoList(props) {
-  const [valueChange, setValueChange] = useState('');
-  let tempValue = '';
-
-  const { todoList, handleCheckDone, deleteTodo, editItem } = props || [
-    { id: null, title: null, checkDone: false },
+  const { todoList } = props || [
+    { id: null, title: null, isChecked: false },
   ];
-  function checkDone(index, checkDone) {
-    if (!handleCheckDone) return;
-    handleCheckDone(index, checkDone);
-  }
-  function deleteItem(index) {
-    if (!deleteTodo) return;
-    deleteTodo(index);
-  }
-
-  function itemChange(id, e) {
-    tempValue += e.target.value;
-    console.log(tempValue);
-    editItem(id, tempValue);
-    tempValue = '';
-  }
 
   return (
     <div>
       {todoList.map((todo) =>
         <ItemTodo key={todo.id} >
-          <TitleTodo><input value={todo.title} onChange={e => itemChange(todo.id, e)}></input></TitleTodo>
-          <CheckDoneTodo><input type="checkbox" checked={todo.checkDone} onChange={(e) => checkDone(todo.id, todo.checkDone)}></input>Done</CheckDoneTodo>
-          <DeleteTodo onClick={e => deleteItem(todo.id)}>Delete</DeleteTodo>
+          <TitleTodo><input value={todo.title} onChange={e => props.handleEditTodo(todo.id, e.target.value)}></input></TitleTodo>
+          <CheckDoneTodo><input type="checkbox" checked={todo.isChecked} onChange={(e) => props.handleCheckDone(todo.id, todo.isChecked)}></input>Done</CheckDoneTodo>
+          <DeleteTodo onClick={e => props.handleDelete(todo.id)}>Delete</DeleteTodo>
         </ItemTodo>
-      )
-      }
+      )}
     </div >
   );
 }
