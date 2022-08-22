@@ -31,9 +31,9 @@ function TodoList(props) {
     <div>
       {todoList.map((todo) =>
         <ItemTodo key={todo.id} >
-          <TitleTodo><input value={todo.title} onChange={e => props.handleEditTodo(todo.id, e.target.value)}></input></TitleTodo>
-          <CheckDoneTodo><input type="checkbox" checked={todo.isChecked} onChange={(e) => props.handleCheckDone(todo.id, todo.isChecked)}></input>Done</CheckDoneTodo>
-          <DeleteTodo onClick={e => props.handleDelete(todo.id)}>Delete</DeleteTodo>
+          <TitleTodo><input value={todo.title} onChange={e => props.onEditTodo(todo.id, e.target.value)}></input></TitleTodo>
+          <CheckDoneTodo><input type="checkbox" checked={todo.isChecked} onChange={(e) => props.onCheckDone(todo.id, todo.isChecked)}></input>Done</CheckDoneTodo>
+          <DeleteTodo onClick={e => props.onDelete(todo.id)}>Delete</DeleteTodo>
         </ItemTodo>
       )}
     </div >

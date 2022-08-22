@@ -9,25 +9,24 @@ const FormDiv = styled.div`
 function TodoFormInput(props) {
   let value = '';
   const [inputValue, setInputValue] = useState('');
-  const { handleSubmitForm } = props;
+  const { onSubmitForm } = props;
 
-  function handleSubmit(e) {
+  function onSubmit(e) {
     e.preventDefault();
     if (inputValue === "") return;
-    handleSubmitForm(inputValue);
+    onSubmitForm(inputValue);
     setInputValue('');
     value = '';
   }
 
-  function inputChange(e) {
-    value += e.target.value;
-    setInputValue(value);
+  function handleChange(e) {
+    setInputValue(e.target.value);
     console.log(value);
   }
   return (
     <FormDiv>
-      <form onSubmit={handleSubmit}>
-        <input placeholder="Do somethings..." value={inputValue} onChange={e => inputChange(e)}></input>
+      <form onSubmit={onSubmit}>
+        <input placeholder="Do somethings..." value={inputValue} onChange={e => handleChange(e)}></input>
         <button>Add to list</button>
       </form>
     </FormDiv>
